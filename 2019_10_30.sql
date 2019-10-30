@@ -85,7 +85,7 @@ select *
 from users
 where usernm = '»ø¸®';
 
-test
+test2
 
 
 
