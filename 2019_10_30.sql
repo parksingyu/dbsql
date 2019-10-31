@@ -86,7 +86,3 @@ from users
 where usernm = '»ø¸®';
 
 
-
-
-
-
