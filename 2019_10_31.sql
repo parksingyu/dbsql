@@ -111,6 +111,133 @@ FROM member
 WHERE mem_name LIKE '%이%';  --mem_name이 문자열안에 이가 포함되는 데이터 
 --WHERE mem_name LIKE '이%';  --mem_name이 이로 시작하는 데이터 
 
+--NULL 비교
+--col IS NULL
+--EMP 테이블에서 MGR 정보가 없는 사람(NULL) 조회
+
+SELECT *
+FROM emp
+WHERE MGR IS NULL;
+
+--소속 부서가 10번이 아닌 직원들
+SELECT *
+FROM emp
+WHERE deptno != '10';
+-- =, !=
+-- is null is not null
+
+--조건에 맞는 데이터 조회하기 (IS NULL 실습 where6)
+--emp 테이블에서 상여(comm)가 있는 회원의 정보를 다음과 같이 조회되도록 쿼리를 작성하시오
+SELECT *
+FROM emp
+WHERE comm IS NOT NULL;
+
+--AND / OR
+--관리자(mgr) 사번이 7698이고 급여가 1000 이상인 사람
+SELECT *
+FROM emp
+WHERE mgr = 7698
+AND sal >= 1000;
+-- emp테이블에서 관리자(mgr) 사번이 7698이거나
+--    급여가(sal)가 1000이상인 직원 조회
+
+SELECT *
+FROM emp
+WHERE mgr = 7698
+OR sal >= 1000;
+
+--emp 테이블에서 관리자(mgr) 사번이 7698이 아니고, 7939가 아닌 직원들 조회
+SELECT *
+FROM emp
+WHERE mgr NOT IN(7698, 7839);    -- IN --> OR
+
+--위의 쿼리를 AND/OR 연산자로 변환
+SELECT *
+FROM emp
+WHERE mgr != 7698
+AND mgr != 7839;
+
+--IN, NOT IN 연산자의 NULL 처리
+--emp 테이블에서 관리자(mgr) 사번이 7698, 7839 또는 null이 아닌 직원들 조회
+SELECT *
+FROM emp
+WHERE mgr NOT IN (7698, 7839)
+AND mgr IS NOT NULL;
+
+--논리연산(AND, OR 실습 where7)
+--emp 테이블에서 job이 SALESMAN 이고 입사일자가 1981년 6월 1일 이후인 직원의 정보를 다음과 같이 조회하세요.
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN'
+AND hiredate >= TO_DATE('19810601', 'YYYYMMDD');
+
+-- 논리연산(AND, OR 실습 where8)
+-- emp 테이블에서 부서번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 
+-- 직원의 정보를 다음과 같이 조회하세요.(IN, NOT IN 연산자 사용금지)
+SELECT *
+FROM emp
+WHERE DEPTNO != 10
+AND hiredate >= TO_DATE('19810601', 'YYYYMMDD');
+
+-- 논리연산(AND, OR 실습 where9)
+-- emp 테이블에서 부서번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 
+-- 직원의 정보를 다음과 같이 조회하세요.(IN, NOT IN 연산자 사용)
+SELECT *
+FROM emp
+WHERE DEPTNO NOT IN (10)
+AND hiredate >= TO_DATE('19810601', 'YYYYMMDD');
+
+-- 논리연산(AND, OR 실습 where10)
+-- emp 테이블에서 부서번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 
+-- 직원의 정보를 다음과 같이 조회하세요.(부서는 10, 20, 30 만 있다고 가정하고 IN 연산자를 사용)
+SELECT *
+FROM emp
+WHERE DEPTNO IN (20, 30)
+AND hiredate >= TO_DATE('19810601', 'YYYYMMDD');
+
+-- 논리연산(AND, OR 실습 where11)
+-- emp테이블에서 job이 SALESMAN이거나 입사일자가 1981년 6월 1일 이후인
+-- 직원의 정보를 다음과 같이 조회하세요.
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN' 
+or hiredate >= TO_DATE('19810601', 'YYYYMMDD');
+
+-- 논리연산(AND, OR 실습 where12)
+-- emp테이블에서 job이 SALESMAN이거나 사원번호가 78로 시작하는
+-- 직원의 정보를 다음과 같이 조회하세요.
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN' 
+or empno LIKE '78%';
+
+-- 논리연산(AND, OR 실습 where13)
+-- emp테이블에서 job이 SALESMAN이거나 사원번호가 78로 시작하는
+-- 직원의 정보를 다음과 같이 조회하세요.
+-- (like 연산자를 사용하지 마세요)
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN' 
+or empno < 7900
+AND empno >= 7800;
+
+-- 논리연산(AND, OR 실습 where13_2)
+-- emp테이블에서 job이 SALESMAN이거나 사원번호가 78로 시작하는
+-- 직원의 정보를 다음과 같이 조회하세요.
+-- (like 연산자를 사용하지 마세요)
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN' 
+or empno between 7800 and 7899;
+-- 논리연산(AND, OR 실습 where14)
+-- emp테이블에서 job이 SALESMAN이거나 사원번호가 78로 시작하면서
+-- 입사일자가 1981년 6월 1일 이후인 직원의 정보를 다음과 같이 조회하세요
+
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN' 
+or empno LIKE '78%'
+AND hiredate >= TO_DATE('19810601', 'YYYYMMDD');
 
 SELECT *
 FROM dept;
