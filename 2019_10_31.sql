@@ -8,7 +8,6 @@
 SELECT 'TEST'
 FROM emp;
 
-
 DESC user_tables;
 SELECT table_name, 'SELECT * FROM ' || table_name || ';' AS select_query
 FROM user_tables
@@ -73,6 +72,9 @@ SELECT *
 FROM emp
 WHERE deptno = 10
      OR deptno = 20;
+     
+SELECT *
+FROM users;
      
 SELECT userid, usernm
 FROM users
