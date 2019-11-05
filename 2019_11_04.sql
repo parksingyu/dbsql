@@ -181,6 +181,14 @@ SELECT ename, TO_CHAR(hiredate, 'YYYY-MM-DD HH24:MI:SS') hiredate,
 FROM emp
 WHERE ename='SMITH';
 
+SELECT e.*
+FROM emp e
+ORDER BY ename;
+
+SELECT TO_DATE('1981/03/01', 'YYYY/MM/DD'),
+       TO_CHAR(TO_DATE('35/03/01', 'YY/MM/DD')+1, 'YYYY/MM/DD') r1
+FROM dual;
+
 --NEXT_DAY(DATE, 요일) : DATE 이후 첫번째 요일의 날짜
 SELECT SYSDATE, 
        NEXT_DAY(SYSDATE, 2) first_sat, -- 오늘날짜이후 첫 토요일 일자
