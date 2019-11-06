@@ -9,7 +9,6 @@ FROM DUAL;   --201602라고 입력하면 윤년이어서 29가 출력된다.
 SELECT :yyyymm as PARAM, TO_CHAR(LAST_DAY(TO_DATE(:YYYYMM, 'YYYYMM')), 'DD') dt  -- 바인딩 하는 방법
 FROM DUAL;   --201602라고 입력하면 윤년이어서 29가 출력된다.
 
-
 explain plan for
 SELECT *
 FROM emp
